@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/user_routes');
+// const categoryRoutes=require('./routes/category_route');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/users', userRoutes);
+// app.use('/api/',categoryRoutes);
 
 // Error handling middleware (optional)
 app.use((err, req, res, next) => {
