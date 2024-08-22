@@ -67,7 +67,7 @@ exports.getProductById = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        res.json(product);
+        res.json({ "success": true, "message": "Products Data Retrieve Successfully...!!!", "data": product });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -92,7 +92,7 @@ exports.updateProduct = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        res.json(product);
+        res.json({ "success": true, "message": "Product Updated Successfully...!!!", "data": product });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -109,7 +109,7 @@ exports.deleteProduct = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        res.json({ message: 'Product deleted successfully' });
+        res.json({ "success": true, message: 'Product deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -18,15 +18,15 @@ const router = express.Router();
 router.post('/add', protect, addProduct);
 
 // Public route for getting all products
-router.get('/products',protect, getProducts);
+router.get('/products', protect, getProducts);
 
 // Public route for getting a single product by ID
-router.get('/:id', getProductById);
+router.get('/product/:id', getProductById);
 
 // Protected route for updating a product by ID
-router.put('/:id', protect, updateProduct);
+router.put('/product/:id', protect, updateProduct);
 
 // Protected route for deleting a product by ID
-router.delete('/:id', protect, deleteProduct);
+router.delete('/product/:id', protect, deleteProduct);
 
 module.exports = router;
