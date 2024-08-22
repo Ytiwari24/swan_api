@@ -54,3 +54,26 @@ exports.loginUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// Get user data with token verification
+exports.getUserData = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      "success": true, "message": "User Data Retrive Successfully...!!!", "data": {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        mobile_no: user.mobile_no,
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

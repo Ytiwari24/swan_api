@@ -1,81 +1,71 @@
-const Category = require('../models/category');
+// // category_controller.js
 
-// @desc    Get all categories
-// @route   GET /api/categories
-// @access  Private
-exports.getCategories = async (req, res) => {
-  try {
-    const categories = await Category.find();
-    res.json(categories);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+// const Category = require('../models/category');
 
-// @desc    Create a new category
-// @route   POST /api/categories
-// @access  Private
-exports.createCategory = async (req, res) => {
-  const { name, description } = req.body;
+// exports.getCategories = async (req, res) => {
+//   try {
+//     const categories = await Category.find();
+//     res.json(categories);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
-  try {
-    const category = new Category({
-      name,
-      description,
-    });
+// exports.createCategory = async (req, res) => {
+//   const { name, description } = req.body;
 
-    const savedCategory = await category.save();
-    res.json(savedCategory);
-  } catch (error) {
-    if (error.name === 'ValidationError') {
-      res.status(400).json({ message: 'Invalid category name' });
-    } else {
-      res.status(500).json({ message: error.message });
-    }
-  }
-};
+//   try {
+//     const category = new Category({
+//       name,
+//       description,
+//     });
 
-// @desc    Update a category
-// @route   PUT /api/categories/:id
-// @access  Private
-exports.updateCategory = async (req, res) => {
-  const { name, description } = req.body;
+//     const savedCategory = await category.save();
+//     res.json(savedCategory);
+//   } catch (error) {
+//     if (error.name === 'ValidationError') {
+//       res.status(400).json({ message: 'Invalid category name' });
+//     } else {
+//       res.status(500).json({ message: error.message });
+//     }
+//   }
+// };
 
-  try {
-    let category = await Category.findById(req.params.id);
+// exports.updateCategory = async (req, res) => {
+//   const { name, description } = req.body;
 
-    if (!category) {
-      return res.status(404).json({ message: 'Category not found' });
-    }
+//   try {
+//     let category = await Category.findById(req.params.id);
 
-    category.name = name || category.name;
-    category.description = description || category.description;
+//     if (!category) {
+//       return res.status(404).json({ message: 'Category not found' });
+//     }
 
-    const updatedCategory = await category.save();
-    res.json(updatedCategory);
-  } catch (error) {
-    if (error.name === 'ValidationError') {
-      res.status(400).json({ message: 'Invalid category name' });
-    } else {
-      res.status(500).json({ message: error.message });
-    }
-  }
-};
+//     category.name = name || category.name;
+//     category.description = description || category.description;
 
-// @desc    Delete a category
-// @route   DELETE /api/categories/:id
-// @access  Private
-exports.deleteCategory = async (req, res) => {
-  try {
-    const category = await Category.findById(req.params.id);
+//     const updatedCategory = await category.save();
+//     res.json(updatedCategory);
+//   } catch (error) {
+//     if (error.name === 'ValidationError') {
+//       res.status(400).json({ message: 'Invalid category name' });
+//     } else {
+//       res.status(500).json({ message: error.message });
+//     }
+//   }
+// };
 
-    if (!category) {
-      return res.status(404).json({ message: 'Category not found' });
-    }
+// exports.deleteCategory = async (req, res) => {
+//   try {
+//     const category = await Category.findById(req.params.id);
 
-    await category.remove();
-    res.json({ message: 'Category removed' });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+//     if (!category) {
+//       return res.status(404).json({ message: 'Category not found' });
+//     }
+
+//     await category.remove();
+//     res.json({ message: 'Category removed' });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
