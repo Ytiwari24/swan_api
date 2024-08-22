@@ -55,6 +55,35 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+// const User = require('../models/user_model');
+// const bcrypt = require('bcryptjs');
+
+// Update user profile
+exports.updateUser = async (req, res) => {
+  const { name, email, mobile_no, password } = req.body;
+  const userId = req.user._id;  // The ID of the user from the token
+
+  try {
+    const updateFields = { name, email, mobile_no };
+
+    if (password) {
+      // Hash the new password before saving
+      updateFields.password = await bcrypt.hash(password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(userId, updateFields, { new: true }).select('-password');
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ "success": true, "message": "User Updated Successfully...!!!", "data": updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 
 // Get user data with token verification
 exports.getUserData = async (req, res) => {
