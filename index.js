@@ -3,7 +3,8 @@ const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/user_routes');
-const productRoute = require('./routes/product_routes')
+const productRoute = require('./routes/product_routes');
+// const cartRoute = require('./routes/cart_route');
 
 const app = express();
 
@@ -16,7 +17,8 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/', userRoutes);
-app.use('/', productRoute)
+app.use('/', productRoute);
+// app.use('/', cartRoute);
 
 
 // Error handling middleware (optional)
